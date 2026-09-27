@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #c2185b;
+  --color-tint: #fce4ec;
+  --color-ink: #252525;
+  --color-ink-muted: #6b6b6b;
+  --color-white: #ffffff;
+  /* Neutral "matte material" tone for the conceptual visual system —
+     never used for text, only for object fills/shadows in components/visuals. */
+  --color-cloud: #f4f3f5;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-tint: var(--color-tint);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-cloud: var(--color-cloud);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Desktop-only custom cursor: hide the native cursor only once JS has
+   confirmed a fine pointer + no reduced-motion, via this class on <html>. */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-ink);
+  color: var(--color-white);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.5rem 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* Consistent, on-brand focus ring across every interactive element. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Browser surfaces that ship with generic defaults, themed to the brand. */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+input,
+select,
+textarea {
+  caret-color: var(--color-primary);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--color-primary) 55%, transparent);
+  border-radius: 999px;
+  border: 2px solid var(--color-white);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary);
+}
+
+/* Smooth FAQ / disclosure open-close, skipped under reduced motion. */
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+.accordion-content[data-state="open"] {
+  animation: accordion-down 200ms ease-out;
+}
+.accordion-content[data-state="closed"] {
+  animation: accordion-up 200ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .accordion-content[data-state="open"],
+  .accordion-content[data-state="closed"] {
+    animation: none;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+}

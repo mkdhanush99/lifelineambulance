@@ -1,0 +1,38 @@
+// Hyderabad localities referenced on the coverage page. This is a descriptive
+// list of areas we discuss coverage for on request — not a promise of
+// guaranteed response time in any specific locality, and not a set of
+// individual landing pages (see brief: no doorway pages per-locality).
+export const AREAS = [
+  "Banjara Hills",
+  "Jubilee Hills",
+  "Somajiguda",
+  "Punjagutta",
+  "Khairatabad",
+  "Ameerpet",
+  "Begumpet",
+  "Secunderabad",
+  "Kukatpally",
+  "Kondapur",
+  "Madhapur",
+  "HITEC City",
+  "Gachibowli",
+  "Manikonda",
+  "Nanakramguda",
+  "Mehdipatnam",
+  "Tolichowki",
+  "Attapur",
+  "Rajendranagar",
+  "LB Nagar",
+  "Dilsukhnagar",
+  "Kothapet",
+  "Vanasthalipuram",
+  "Hayathnagar",
+  "Uppal",
+  "Nacharam",
+  "Tarnaka",
+  "Malakpet",
+  "Nampally",
+  "Abids",
+  "Koti",
+  "Charminar / Old City",
+];
