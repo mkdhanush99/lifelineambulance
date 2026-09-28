@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "ICU Ambulance", path: PATH },
   ],
   heroKicker: "ICU Ambulance",
+  illustration: { type: "icu", label: "ICU ambulance monitoring illustration" },
   heroTitle: "ICU Ambulance Service in Hyderabad",
   heroIntro:
     "Some patients need close monitoring throughout a journey, not just transport. An ICU ambulance is discussed and arranged for exactly that kind of transfer.",

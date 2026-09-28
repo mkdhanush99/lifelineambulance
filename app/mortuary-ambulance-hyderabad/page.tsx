@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Mortuary Ambulance", path: PATH },
   ],
   heroKicker: "Mortuary Ambulance",
+  illustration: { type: "mortuary", label: "Mortuary ambulance illustration" },
   heroTitle: "Mortuary Ambulance Service in Hyderabad",
   heroIntro:
     "A mortuary ambulance is a vehicle specifically used for moving a body to or from a hospital mortuary. Call our team to arrange this with care.",

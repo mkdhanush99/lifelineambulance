@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Dead Body Transport", path: PATH },
   ],
   heroKicker: "Dead Body Transport",
+  illustration: { type: "dead-body", label: "Respectful transport illustration" },
   heroTitle: "Dead Body Transport Service in Hyderabad",
   heroIntro:
     "At a difficult time for a family, we try to make arranging transport as straightforward as possible. Call our team and we'll talk through what's needed.",

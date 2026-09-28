@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "NICU / Neonatal Ambulance", path: PATH },
   ],
   heroKicker: "NICU / Neonatal Ambulance",
+  illustration: { type: "nicu", label: "Neonatal transport cot illustration" },
   heroTitle: "NICU & Neonatal Ambulance in Hyderabad",
   heroIntro:
     "Transporting a newborn or infant is a different undertaking from transporting an adult patient. Speak with our team about what a neonatal transfer needs.",

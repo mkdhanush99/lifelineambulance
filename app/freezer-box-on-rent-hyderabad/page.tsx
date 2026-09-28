@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Freezer Box on Rent", path: PATH },
   ],
   heroKicker: "Freezer Box on Rent",
+  illustration: { type: "freezer-box", label: "Freezer box rental illustration" },
   heroTitle: "Freezer Box on Rent in Hyderabad",
   heroIntro:
     "When family members need time to travel or arrangements need to be finalised, a freezer box can be rented to preserve the body in the meantime.",

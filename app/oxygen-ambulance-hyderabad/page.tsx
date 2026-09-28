@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Oxygen Ambulance", path: PATH },
   ],
   heroKicker: "Oxygen Ambulance",
+  illustration: { type: "oxygen", label: "Oxygen cylinder and airflow illustration" },
   heroTitle: "Oxygen Ambulance Service in Hyderabad",
   heroIntro:
     "Some patients need supplemental oxygen throughout a journey, without necessarily needing full ICU or ventilator support. An oxygen ambulance is arranged for that need.",

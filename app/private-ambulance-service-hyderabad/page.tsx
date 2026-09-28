@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Private Ambulance", path: PATH },
   ],
   heroKicker: "Private Ambulance",
+  illustration: { type: "private", label: "Private ambulance booking illustration" },
   heroTitle: "Private Ambulance Service in Hyderabad",
   heroIntro:
     "Not every ambulance journey is an emergency. A private ambulance is booked in advance for planned patient transport, on your schedule rather than dispatched urgently.",

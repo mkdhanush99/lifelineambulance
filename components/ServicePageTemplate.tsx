@@ -1,12 +1,13 @@
 import { SERVICES } from "@/lib/services";
-import { AVAILABILITY_CAVEAT, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site-config";
-import { PRIMARY_BUTTON } from "@/lib/button-styles";
+import { AVAILABILITY_CAVEAT, PHONE_DISPLAY, PHONE_HREF, WHATSAPP_HREF } from "@/lib/site-config";
+import { PRIMARY_BUTTON, SECONDARY_BUTTON } from "@/lib/button-styles";
 import { Breadcrumbs, type Crumb } from "./Breadcrumbs";
 import { CTASection } from "./CTASection";
 import { FAQ, type FaqItem } from "./FAQ";
 import { SectionHeading } from "./SectionHeading";
 import { ServiceCard } from "./ServiceCard";
 import { ServicePhoto } from "./ServicePhoto";
+import { ServiceIllustration, type ServiceIllustrationType } from "./visuals/ServiceIllustration";
 import Link from "next/link";
 
 export type ServicePageContent = {
@@ -14,6 +15,8 @@ export type ServicePageContent = {
   heroKicker: string;
   heroTitle: string;
   heroIntro: string;
+  /** Custom brand-geometric hero illustration — takes priority over heroImage. */
+  illustration?: { type: ServiceIllustrationType; label: string };
   heroImage?: { src: string; alt: string };
   whatItIs: string[];
   whenAppropriate: string[];
@@ -33,26 +36,42 @@ export function ServicePageTemplate({ content }: { content: ServicePageContent }
   const related = SERVICES.filter((s) => content.relatedSlugs.includes(s.slug));
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 md:px-8 md:py-14">
+    <div className="mx-auto max-w-6xl px-4 py-10 md:px-8 md:py-14">
       <Breadcrumbs items={content.breadcrumb} />
 
-      <section>
-        <p className="text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase">
-          {content.heroKicker}
-        </p>
-        <h1 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-[var(--color-ink)] md:text-4xl">
-          {content.heroTitle}
-        </h1>
-        <p className="mt-5 max-w-2xl text-base text-[var(--color-ink-muted)] md:text-lg">
-          {content.heroIntro}
-        </p>
-        <a href={PHONE_HREF} className={`${PRIMARY_BUTTON} mt-6 px-7 py-3.5 text-base`}>
-          {content.ctaLabel ?? `Call ${PHONE_DISPLAY}`}
-        </a>
-        {content.heroImage && <ServicePhoto src={content.heroImage.src} alt={content.heroImage.alt} />}
+      <section className="grid grid-cols-1 items-center gap-6 overflow-x-clip md:grid-cols-[1.1fr_1fr] md:gap-10">
+        <div>
+          <p className="text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase">
+            {content.heroKicker}
+          </p>
+          <h1 className="mt-3 text-3xl leading-tight font-bold tracking-tight text-[var(--color-ink)] md:text-4xl">
+            {content.heroTitle}
+          </h1>
+          <p className="mt-5 max-w-2xl text-base text-[var(--color-ink-muted)] md:text-lg">
+            {content.heroIntro}
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a href={PHONE_HREF} className={`${PRIMARY_BUTTON} px-7 py-3.5 text-base`}>
+              {content.ctaLabel ?? `Call ${PHONE_DISPLAY}`}
+            </a>
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${SECONDARY_BUTTON} px-6 py-3.5 text-base`}
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+        {content.illustration ? (
+          <ServiceIllustration type={content.illustration.type} label={content.illustration.label} />
+        ) : (
+          content.heroImage && <ServicePhoto src={content.heroImage.src} alt={content.heroImage.alt} />
+        )}
       </section>
 
-      <div className="mt-14 space-y-14">
+      <div className="mx-auto mt-14 max-w-4xl space-y-14">
         <section>
           <SectionHeading index="01" title="What this service is" />
           <div className="space-y-4 text-[var(--color-ink)]">

@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "BLS Ambulance", path: PATH },
   ],
   heroKicker: "BLS Ambulance",
+  illustration: { type: "bls", label: "Basic life support ambulance illustration" },
   heroTitle: "BLS Ambulance Service in Hyderabad",
   heroIntro:
     "Many patients need safe, comfortable transport without intensive-care-level monitoring. A BLS (Basic Life Support) ambulance is built for exactly that middle ground.",

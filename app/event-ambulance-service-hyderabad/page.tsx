@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Event Standby Ambulance", path: PATH },
   ],
   heroKicker: "Event Standby Ambulance",
+  illustration: { type: "event", label: "Event standby ambulance illustration" },
   heroTitle: "Event Standby Ambulance Service in Hyderabad",
   heroIntro:
     "Larger gatherings often need an ambulance on standby, ready to respond immediately if something happens. Talk to us about your event's requirements.",

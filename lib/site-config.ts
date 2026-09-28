@@ -4,6 +4,7 @@ export const SITE_URL =
 
 export const PHONE_DISPLAY = "9951244266";
 export const PHONE_HREF = "tel:+919951244266";
+export const WHATSAPP_HREF = "https://wa.me/919951244266";
 
 export type Address = {
   label: string;

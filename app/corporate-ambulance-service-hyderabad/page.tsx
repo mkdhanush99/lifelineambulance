@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Corporate Ambulance", path: PATH },
   ],
   heroKicker: "Corporate Ambulance",
+  illustration: { type: "corporate", label: "Corporate ambulance response illustration" },
   heroTitle: "Corporate Ambulance Service in Hyderabad",
   heroIntro:
     "Offices, factories and industrial sites often want an ambulance arrangement in place before it's needed. We discuss what's realistic for your site and schedule.",

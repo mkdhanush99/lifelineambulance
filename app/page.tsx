@@ -11,7 +11,8 @@ import { BlogCard } from "@/components/BlogCard";
 import { FAQ } from "@/components/FAQ";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
-import { ResponseBars } from "@/components/visuals/ResponseBars";
+import { EscalationBar } from "@/components/visuals/EscalationBar";
+import { LifeLineAtmosphere } from "@/components/ui/life-line-atmosphere";
 import { SECONDARY_BUTTON } from "@/lib/button-styles";
 import { buildMetadata } from "@/lib/metadata";
 import { AREAS } from "@/lib/areas";
@@ -85,14 +86,19 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 md:px-8">
-        <Reveal>
-          <SectionHeading index="02" title="Why Life Line" />
-          <TrustSignal />
-          <Link href="/about/" className="mt-4 inline-block text-sm font-medium text-[var(--color-primary)]">
-            More about Life Line Ambulance Service →
-          </Link>
-        </Reveal>
+      <section className="relative overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <LifeLineAtmosphere height="100%" />
+        </div>
+        <div className="relative z-[3] mx-auto max-w-6xl px-4 py-16 md:px-8">
+          <Reveal>
+            <SectionHeading index="02" title="Why Life Line" />
+            <TrustSignal />
+            <Link href="/about/" className="mt-4 inline-block text-sm font-medium text-[var(--color-primary)]">
+              More about Life Line Ambulance Service →
+            </Link>
+          </Reveal>
+        </div>
       </section>
 
       <section className="relative mx-auto max-w-6xl px-4 py-16 md:px-8">
@@ -115,13 +121,11 @@ export default function Home() {
                   "radial-gradient(120% 100% at 15% 20%, var(--color-tint) 0%, rgba(252,228,236,0.25) 45%, rgba(252,228,236,0) 75%)",
               }}
             />
-            <svg
-              aria-hidden
-              viewBox="0 0 60 60"
-              className="pointer-events-none absolute -top-6 -left-4 h-14 w-14 md:-top-8 md:-left-8 md:h-20 md:w-20"
-            >
-              <ResponseBars x={0} y={40} scale={0.6} opacity={0.7} />
-            </svg>
+            <EscalationBar
+              variant="compact"
+              animated={false}
+              className="pointer-events-none absolute -top-6 -left-4 h-14 w-14 opacity-70 md:-top-8 md:-left-8 md:h-20 md:w-20"
+            />
 
             {/* Mobile: the original simple equal-treatment stack (one column,
                 same aspect ratio, same rounding — deliberately kept, not

@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Emergency Ambulance", path: PATH },
   ],
   heroKicker: "Emergency Ambulance",
+  illustration: { type: "emergency", label: "Emergency ambulance response illustration" },
   heroTitle: "Emergency Ambulance Service in Hyderabad",
   heroIntro:
     "When a medical emergency happens, the priority is getting the patient to appropriate care safely. Call our team directly and we'll discuss ambulance transport to the nearest suitable hospital.",

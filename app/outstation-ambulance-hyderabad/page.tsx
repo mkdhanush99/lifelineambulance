@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Outstation Ambulance", path: PATH },
   ],
   heroKicker: "Outstation Ambulance",
+  illustration: { type: "outstation", label: "Long-distance outstation route illustration" },
   heroTitle: "Outstation Ambulance Service from Hyderabad",
   heroIntro:
     "Long-distance patient transport needs more planning than a local transfer — route, rest stops, fuel and the patient's condition over several hours all matter. Call us to plan the journey.",

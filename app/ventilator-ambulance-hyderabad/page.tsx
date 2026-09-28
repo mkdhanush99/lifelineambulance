@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Ventilator Ambulance", path: PATH },
   ],
   heroKicker: "Ventilator Ambulance",
+  illustration: { type: "ventilator", label: "Ventilator-equipped ambulance illustration" },
   heroTitle: "Ventilator Ambulance in Hyderabad",
   heroIntro:
     "A patient who is currently on a ventilator needs a vehicle and crew equipped for that specific requirement in transit. Call our team to discuss the transfer.",

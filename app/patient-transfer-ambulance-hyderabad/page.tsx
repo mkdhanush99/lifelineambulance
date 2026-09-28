@@ -19,6 +19,7 @@ const content: ServicePageContent = {
     { name: "Patient Transfer Ambulance", path: PATH },
   ],
   heroKicker: "Patient Transfer Ambulance",
+  illustration: { type: "patient-transfer", label: "Patient transfer route illustration" },
   heroTitle: "Patient Transfer Ambulance in Hyderabad",
   heroIntro:
     "Moving a patient between hospitals, or from hospital back home, needs careful coordination on both ends. We help arrange the vehicle for that transfer.",
