@@ -23,10 +23,6 @@ const content: ServicePageContent = {
   heroTitle: "Outstation Ambulance Service from Hyderabad",
   heroIntro:
     "Long-distance patient transport needs more planning than a local transfer — route, rest stops, fuel and the patient's condition over several hours all matter. Call us to plan the journey.",
-  heroImage: {
-    src: "/photos/ambulance-outstation-highway-hyderabad.jpg",
-    alt: "Ambulance on a highway during an outstation patient transfer from Hyderabad",
-  },
   whatItIs: [
     "An outstation ambulance is arranged for patient transport between Hyderabad and another city or town, rather than within Hyderabad itself. These journeys are typically planned in advance rather than dispatched immediately.",
     "Because outstation transfers can take several hours, our coordinator will discuss the patient's condition, the route, and what the vehicle and crew need to carry for the full journey.",

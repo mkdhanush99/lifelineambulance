@@ -23,10 +23,6 @@ const content: ServicePageContent = {
   heroTitle: "Freezer Box on Rent in Hyderabad",
   heroIntro:
     "When family members need time to travel or arrangements need to be finalised, a freezer box can be rented to preserve the body in the meantime.",
-  heroImage: {
-    src: "/photos/freezer-box-equipment-hyderabad.jpg",
-    alt: "Freezer box equipment available for rental in Hyderabad",
-  },
   whatItIs: [
     "A freezer box is rented and placed at the home or another location, used to preserve a body while the family waits for relatives to arrive or finalises funeral arrangements.",
     "This is different from dead body transport (moving the body between locations) and from a mortuary ambulance (a vehicle used within a hospital or mortuary setting). Ask our coordinator if you're unsure which service applies to your situation.",

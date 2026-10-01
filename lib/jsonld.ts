@@ -10,6 +10,8 @@ export function organizationJsonLd() {
     name: BUSINESS_NAME,
     url: SITE_URL,
     telephone: PHONE_DISPLAY,
+    image: new URL("/og-image.jpg", SITE_URL).toString(),
+    logo: new URL("/brand/symbol-pink.svg", SITE_URL).toString(),
     areaServed: "Hyderabad, Telangana, India",
     sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram],
     founder: { "@type": "Person", name: FOUNDER_NAME },
@@ -42,7 +44,7 @@ export function serviceJsonLd(opts: { name: string; description: string; path: s
     url: new URL(opts.path, SITE_URL).toString(),
     areaServed: "Hyderabad, Telangana, India",
     provider: {
-      "@type": "Organization",
+      "@type": "LocalBusiness",
       name: BUSINESS_NAME,
       telephone: PHONE_DISPLAY,
     },

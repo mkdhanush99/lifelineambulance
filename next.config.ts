@@ -34,6 +34,10 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  // Every internal link, canonical and sitemap entry uses a trailing slash;
+  // enforce it at the framework level (redirect the other variant) instead
+  // of relying solely on the canonical tag to consolidate duplicate URLs.
+  trailingSlash: true,
   turbopack: {
     root: __dirname,
   },

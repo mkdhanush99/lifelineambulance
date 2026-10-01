@@ -129,6 +129,63 @@ html {
   }
 }
 
+/* Homepage hero: ambulance rise-in and route-line dash travel. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(60px, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hero-dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+.hero-amb {
+  animation: hero-rise 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-route {
+  animation: hero-dash 3s linear 3;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-amb,
+  .hero-route {
+    animation: none !important;
+  }
+}
+
+/* Areas network map: outline draw-in, node fade-in stagger, hover pulse ring. */
+@keyframes hero-dash-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hero-node-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
 @media print {
   header,
   footer,

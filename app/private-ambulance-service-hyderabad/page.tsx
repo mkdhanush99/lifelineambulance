@@ -23,10 +23,6 @@ const content: ServicePageContent = {
   heroTitle: "Private Ambulance Service in Hyderabad",
   heroIntro:
     "Not every ambulance journey is an emergency. A private ambulance is booked in advance for planned patient transport, on your schedule rather than dispatched urgently.",
-  heroImage: {
-    src: "/photos/ambulance-patient-transport-hyderabad.jpg",
-    alt: "Ambulance used for planned patient transport in Hyderabad",
-  },
   whatItIs: [
     "A private ambulance is arranged ahead of time for non-emergency patient transport — for example, a scheduled hospital appointment, a discharge home, or moving a patient between care facilities on a planned date.",
     "Because the journey is planned rather than urgent, there's more time to discuss the patient's needs, the route and timing with our coordinator in advance.",

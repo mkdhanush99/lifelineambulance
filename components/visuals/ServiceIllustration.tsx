@@ -1,8 +1,9 @@
-"use client";
-
-import { motion, MotionConfig } from "motion/react";
-import { EscalationMark } from "./EscalationBar";
-
+/**
+ * The "Life Line Illustration System" — hand-constructed hero illustrations
+ * per service (480x340, 3/4 view, 2.4px ink outline, one rose accent, blush
+ * fill planes, pale rose glow, soft ground shadow). Ported verbatim from the
+ * supplied design; not a generic icon set.
+ */
 export type ServiceIllustrationType =
   | "emergency"
   | "private"
@@ -19,323 +20,397 @@ export type ServiceIllustrationType =
   | "event"
   | "corporate";
 
-// Old local geometry was ~6px-wide bars; the shared EscalationMark uses the
-// logo's real 40px-wide proportions, so scale it down to match existing
-// scene compositions without touching every call site's `scale` value.
-const SIGNATURE_SCALE_CORRECTION = 0.15;
-
-/** The brand's escalating-bar motif — the recurring "Life Line visual signature". */
-function SignatureBars({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
+function Defs() {
   return (
-    <g transform={`translate(${x} ${y}) scale(${scale * SIGNATURE_SCALE_CORRECTION})`}>
-      <EscalationMark withPoint={false} />
-    </g>
-  );
-}
-
-function AmbulanceGlyph({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <rect x="0" y="10" width="70" height="34" rx="8" fill="var(--color-cloud)" stroke="var(--color-ink)" strokeOpacity="0.12" />
-      <rect x="0" y="10" width="26" height="34" rx="8" fill="var(--color-tint)" />
-      <rect x="34" y="18" width="14" height="14" rx="2" fill="var(--color-primary)" opacity="0.9" />
-      <rect x="39" y="21" width="4" height="8" rx="1" fill="white" />
-      <rect x="36" y="23.5" width="10" height="3" rx="1" fill="white" />
-      <circle cx="16" cy="46" r="7" fill="var(--color-ink)" />
-      <circle cx="56" cy="46" r="7" fill="var(--color-ink)" />
-    </g>
-  );
-}
-
-function Cross({ x, y, scale = 1, color = "var(--color-primary)" }: { x: number; y: number; scale?: number; color?: string }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`} stroke={color} strokeWidth="4" strokeLinecap="round">
-      <line x1="10" y1="0" x2="10" y2="20" />
-      <line x1="0" y1="10" x2="20" y2="10" />
-    </g>
-  );
-}
-
-function Waveform({ x, y, w = 90, scale = 1, color = "var(--color-primary)" }: { x: number; y: number; w?: number; scale?: number; color?: string }) {
-  const d = `M0 0 L${w * 0.22} 0 L${w * 0.3} -14 L${w * 0.4} 16 L${w * 0.48} -6 L${w * 0.56} 0 L${w} 0`;
-  return (
-    <motion.path
-      d={d}
-      transform={`translate(${x} ${y}) scale(${scale})`}
-      fill="none"
-      stroke={color}
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      initial={{ pathLength: 0 }}
-      animate={{ pathLength: 1 }}
-      transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
-    />
-  );
-}
-
-function Stretcher({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <rect x="0" y="0" width="80" height="16" rx="5" fill="var(--color-cloud)" stroke="var(--color-ink)" strokeOpacity="0.12" />
-      <line x1="8" y1="0" x2="8" y2="-8" stroke="var(--color-ink)" strokeOpacity="0.25" strokeWidth="2" />
-      <line x1="72" y1="0" x2="72" y2="-8" stroke="var(--color-ink)" strokeOpacity="0.25" strokeWidth="2" />
-      <circle cx="10" cy="20" r="4" fill="var(--color-ink)" opacity="0.7" />
-      <circle cx="70" cy="20" r="4" fill="var(--color-ink)" opacity="0.7" />
-    </g>
-  );
-}
-
-function Cylinder({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <rect x="0" y="10" width="34" height="70" rx="14" fill="var(--color-tint)" stroke="var(--color-primary)" strokeWidth="1.5" />
-      <rect x="10" y="0" width="14" height="14" rx="3" fill="var(--color-ink)" opacity="0.75" />
-      <rect x="6" y="34" width="22" height="8" rx="2" fill="var(--color-primary)" opacity="0.85" />
-    </g>
-  );
-}
-
-function OxygenFlow({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      {[0, 1, 2].map((i) => (
-        <motion.path
-          key={i}
-          d={`M0 ${i * 10} Q10 ${i * 10 - 6} 20 ${i * 10} T40 ${i * 10}`}
-          fill="none"
-          stroke="var(--color-primary)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          opacity={0.75 - i * 0.15}
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.75 - i * 0.15 }}
-          transition={{ duration: 0.6, delay: 0.3 + i * 0.1, ease: "easeOut" }}
-        />
-      ))}
-    </g>
-  );
-}
-
-function Cot({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <path d="M4 20 Q30 -6 56 20" fill="none" stroke="var(--color-primary)" strokeWidth="2" opacity="0.6" />
-      <rect x="0" y="20" width="60" height="22" rx="8" fill="var(--color-tint)" stroke="var(--color-primary)" strokeWidth="1.2" />
-      <line x1="10" y1="50" x2="10" y2="42" stroke="var(--color-ink)" strokeOpacity="0.3" strokeWidth="3" />
-      <line x1="50" y1="50" x2="50" y2="42" stroke="var(--color-ink)" strokeOpacity="0.3" strokeWidth="3" />
-    </g>
-  );
-}
-
-function Monitor({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <rect x="0" y="0" width="52" height="38" rx="6" fill="var(--color-ink)" />
-      <path
-        d="M6 20 L16 20 L20 8 L26 30 L30 16 L34 20 L46 20"
-        fill="none"
-        stroke="var(--color-tint)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <rect x="20" y="38" width="12" height="8" fill="var(--color-ink)" opacity="0.6" />
-    </g>
-  );
-}
-
-function Building({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <rect x="0" y="0" width="60" height="80" rx="4" fill="var(--color-cloud)" stroke="var(--color-ink)" strokeOpacity="0.12" />
-      {[0, 1, 2, 3].map((row) =>
-        [0, 1, 2].map((col) => (
-          <rect
-            key={`${row}-${col}`}
-            x={8 + col * 17}
-            y={8 + row * 17}
-            width="10"
-            height="10"
-            rx="1.5"
-            fill={row === 3 && col === 1 ? "var(--color-primary)" : "var(--color-primary)"}
-            opacity={row === 3 && col === 1 ? 0.9 : 0.18}
-          />
-        )),
-      )}
-    </g>
-  );
-}
-
-function Snowflake({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`} stroke="var(--color-primary)" strokeWidth="2" strokeLinecap="round">
-      {[0, 60, 120].map((angle) => (
-        <line key={angle} x1="0" y1="-14" x2="0" y2="14" transform={`rotate(${angle})`} />
-      ))}
-      {[0, 60, 120].map((angle) => (
-        <g key={`br-${angle}`} transform={`rotate(${angle})`}>
-          <line x1="0" y1="-9" x2="-4" y2="-13" />
-          <line x1="0" y1="-9" x2="4" y2="-13" />
+    <defs>
+      <radialGradient id="lgGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stopColor="#FCE4EC" stopOpacity="0.9" />
+        <stop offset="1" stopColor="#FCE4EC" stopOpacity="0" />
+      </radialGradient>
+      <radialGradient id="lgShd" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stopColor="#252525" stopOpacity="0.3" />
+        <stop offset="1" stopColor="#252525" stopOpacity="0" />
+      </radialGradient>
+      <symbol id="amb" viewBox="0 0 240 112" overflow="visible">
+        <g fill="none" stroke="#252525" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M10 18L28 6H144L134 18Z" fill="#FCE4EC" />
+          <rect x="10" y="18" width="126" height="70" rx="9" fill="#fff" />
+          <path d="M136 34H188Q196 34 202 40L226 64Q232 70 232 78V88H136Z" fill="#fff" />
+          <path d="M148 44H184L208 68H148Z" fill="#FCE4EC" />
+          <path d="M32 76L40 62M52 76L66 50M74 76L94 38" stroke="#C2185B" strokeWidth="7" />
+          <rect x="146" y="23" width="34" height="9" rx="4" fill="#C2185B" stroke="none" />
+          <circle cx="52" cy="90" r="15" fill="#252525" />
+          <circle cx="52" cy="90" r="5.5" fill="#fff" stroke="none" />
+          <circle cx="188" cy="90" r="15" fill="#252525" />
+          <circle cx="188" cy="90" r="5.5" fill="#fff" stroke="none" />
         </g>
-      ))}
-    </g>
-  );
-}
-
-function RouteLine({ x, y, w = 100, scale = 1 }: { x: number; y: number; w?: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <motion.path
-        d={`M0 0 Q${w * 0.3} -18 ${w * 0.55} 0 T${w} 6`}
-        fill="none"
-        stroke="var(--color-primary)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeDasharray="4 6"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.65 }}
-        transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
-      />
-      <motion.circle
-        cx={w}
-        cy={6}
-        r="5"
-        fill="var(--color-primary)"
-        initial={{ opacity: 0, scale: 0.4 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 1.1, ease: "easeOut" }}
-      />
-    </g>
-  );
-}
-
-function PulseRing({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      {[0, 1, 2].map((i) => (
-        <motion.circle
-          key={i}
-          r={6 + i * 9}
-          fill="none"
-          stroke="var(--color-primary)"
-          strokeWidth="1.6"
-          initial={{ opacity: 0.5 - i * 0.12, scale: 0.7 }}
-          animate={{ opacity: 0.28 - i * 0.08, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: "easeOut" }}
-        />
-      ))}
-      <circle r="4" fill="var(--color-primary)" />
-    </g>
+      </symbol>
+      <symbol id="van" viewBox="0 0 250 100" overflow="visible">
+        <g fill="none" stroke="#252525" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M8 78V34Q8 24 20 24H150Q164 24 174 34L204 58Q214 64 232 66Q244 68 244 78V80H8Z" fill="#fff" />
+          <rect x="26" y="34" width="112" height="16" rx="8" fill="#FCE4EC" />
+          <path d="M156 34H170L194 56H156Z" fill="#FCE4EC" />
+          <path d="M9 64H243" stroke="#C2185B" strokeWidth="3" />
+          <circle cx="52" cy="80" r="14" fill="#252525" />
+          <circle cx="52" cy="80" r="5" fill="#fff" stroke="none" />
+          <circle cx="196" cy="80" r="14" fill="#252525" />
+          <circle cx="196" cy="80" r="5" fill="#fff" stroke="none" />
+        </g>
+      </symbol>
+    </defs>
   );
 }
 
 const SCENES: Record<ServiceIllustrationType, () => React.ReactNode> = {
   emergency: () => (
     <>
-      <PulseRing x={150} y={50} />
-      <AmbulanceGlyph x={30} y={85} />
-      <SignatureBars x={12} y={40} scale={0.6} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="250" cy="292" rx="190" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="route" stroke="#C2185B" strokeWidth="3" opacity="0.55">
+        <path d="M22 176H62" />
+        <path d="M8 204H56" opacity="0.7" />
+        <path d="M28 232H62" opacity="0.5" />
+      </g>
+      <g data-part="object">
+        <use href="#amb" x="70" y="130" width="360" height="168" />
+      </g>
+      <g data-part="signal" stroke="#C2185B" strokeWidth="3">
+        <path d="M314 156V138M292 160L279 148M338 160L351 148" />
+      </g>
+      <path data-part="mark" d="M244 175v12M238 181h12" stroke="#C2185B" strokeWidth="3.6" />
     </>
   ),
   private: () => (
     <>
-      <AmbulanceGlyph x={35} y={80} />
-      <circle cx="150" cy="55" r="10" fill="var(--color-tint)" stroke="var(--color-primary)" strokeWidth="1.5" />
-      <path d="M146 55 L149 58 L155 51" fill="none" stroke="var(--color-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <SignatureBars x={15} y={35} scale={0.6} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="250" cy="292" rx="190" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="object">
+        <use href="#amb" x="70" y="130" width="360" height="168" />
+      </g>
+      <g data-part="signal">
+        <circle cx="330" cy="150" r="18" fill="#fff" stroke="#C2185B" strokeWidth="2.4" />
+        <path d="M323 150l5 5 9-11" stroke="#C2185B" strokeWidth="3" />
+      </g>
+      <path data-part="route" d="M22 200H66" stroke="#C2185B" strokeWidth="2.4" strokeDasharray="1 8" opacity="0.6" />
     </>
   ),
   bls: () => (
     <>
-      <Stretcher x={55} y={110} />
-      <Cross x={85} y={55} scale={1.3} />
-      <Waveform x={40} y={155} w={110} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="250" cy="294" rx="200" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="object">
+        <path d="M130 226L182 274M182 226L130 274M292 226L344 274M344 226L292 274M118 276H356" />
+        <rect x="90" y="200" width="272" height="26" rx="13" fill="#fff" />
+        <path d="M200 200v26M246 200v26" stroke="#C2185B" strokeWidth="4" />
+        <rect x="284" y="186" width="70" height="14" rx="7" fill="#FCE4EC" />
+        <circle cx="120" cy="286" r="7" fill="#252525" />
+        <circle cx="120" cy="286" r="2.66" fill="#fff" stroke="none" />
+        <circle cx="354" cy="286" r="7" fill="#252525" />
+        <circle cx="354" cy="286" r="2.66" fill="#fff" stroke="none" />
+      </g>
+      <g data-part="secondary">
+        <path d="M412 292V152M392 292H432" />
+        <rect x="376" y="98" width="72" height="54" rx="9" fill="#252525" />
+      </g>
+      <path data-part="signal" d="M384 126h10l6-12 7 22 6-11h16" stroke="#C2185B" strokeWidth="2.6" />
+      <path data-part="route" d="M30 314H300" stroke="#C2185B" strokeWidth="2.4" strokeDasharray="1 8" opacity="0.7" />
     </>
   ),
   icu: () => (
     <>
-      <AmbulanceGlyph x={20} y={110} scale={0.9} />
-      <Monitor x={110} y={40} />
-      <Waveform x={112} y={62} w={40} scale={0.7} color="var(--color-tint)" />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="250" cy="294" rx="205" ry="12" fill="url(#lgShd)" stroke="none" />
+      <path data-part="route" d="M30 314H450" stroke="#C2185B" strokeWidth="2.4" strokeDasharray="1 8" opacity="0.7" />
+      <g data-part="secondary">
+        <rect x="62" y="196" width="34" height="92" rx="15" fill="#fff" />
+        <path d="M72 196v-10h14v10" />
+        <rect x="74" y="176" width="10" height="10" rx="2" fill="#C2185B" stroke="none" />
+        <path d="M62 226H96" stroke="#C2185B" strokeWidth="3" />
+        <path d="M352 292V96M336 96H368M334 292H370" />
+        <rect x="332" y="104" width="26" height="40" rx="9" fill="#FCE4EC" stroke="#C2185B" />
+        <path d="M345 144C345 176 330 196 312 210" strokeWidth="1.8" />
+        <path d="M428 168V292M410 292H446" />
+        <rect x="386" y="112" width="84" height="56" rx="9" fill="#252525" />
+      </g>
+      <path data-part="signal" d="M394 142h12l7-16 9 30 8-20 6 6h20" stroke="#C2185B" strokeWidth="2.6" />
+      <g data-part="object">
+        <path d="M124 250V282M316 250V282M116 282H324" />
+        <rect x="104" y="232" width="232" height="16" rx="8" fill="#fff" />
+        <rect x="108" y="210" width="224" height="24" rx="12" fill="#FCE4EC" />
+        <path d="M228 210v24" stroke="#C2185B" strokeWidth="3.4" />
+        <circle cx="124" cy="290" r="7" fill="#252525" />
+        <circle cx="124" cy="290" r="2.66" fill="#fff" stroke="none" />
+        <circle cx="316" cy="290" r="7" fill="#252525" />
+        <circle cx="316" cy="290" r="2.66" fill="#fff" stroke="none" />
+      </g>
+      <path data-part="route" d="M79 176C79 146 120 148 158 208" stroke="#C2185B" strokeWidth="2.6" strokeDasharray="1 6" />
     </>
   ),
   ventilator: () => (
     <>
-      <rect x="30" y="60" width="46" height="60" rx="8" fill="var(--color-cloud)" stroke="var(--color-ink)" strokeOpacity="0.12" />
-      <rect x="40" y="70" width="26" height="16" rx="3" fill="var(--color-primary)" opacity="0.85" />
-      <Waveform x={30} y={100} w={46} scale={0.8} />
-      <OxygenFlow x={90} y={70} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="260" cy="294" rx="205" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="object">
+        <rect x="70" y="92" width="124" height="152" rx="14" fill="#fff" />
+        <rect x="84" y="106" width="96" height="58" rx="8" fill="#252525" />
+        <circle cx="104" cy="196" r="10" fill="#fff" />
+        <circle cx="140" cy="196" r="10" fill="#fff" />
+        <circle cx="170" cy="196" r="5" fill="#C2185B" stroke="none" />
+        <path d="M132 244V282M90 290H174M100 282H164" />
+      </g>
+      <path data-part="signal" d="M92 136q9-24 18 0t18 0t18 0t18 0" stroke="#C2185B" strokeWidth="3" />
+      <path data-part="route" d="M194 208C246 208 246 166 302 194" stroke="#C2185B" strokeWidth="6" strokeDasharray="0.1 6" />
+      <g data-part="secondary">
+        <path d="M292 292V252M436 292V252M280 292H448" />
+        <rect x="268" y="232" width="192" height="20" rx="10" fill="#fff" />
+        <path d="M296 232C296 196 340 186 380 202L444 232Z" fill="#FCE4EC" />
+        <path d="M340 200C344 214 346 224 346 232M394 212C398 222 400 228 400 232" strokeWidth="1.8" />
+        <circle cx="308" cy="200" r="11" fill="#FCE4EC" stroke="#C2185B" />
+        <circle cx="292" cy="296" r="7" fill="#252525" />
+        <circle cx="292" cy="296" r="2.66" fill="#fff" stroke="none" />
+        <circle cx="436" cy="296" r="7" fill="#252525" />
+        <circle cx="436" cy="296" r="2.66" fill="#fff" stroke="none" />
+      </g>
+      <path data-part="signal" d="M226 178l8 6-8 6M244 170l8 6-8 6" stroke="#C2185B" strokeWidth="2.4" opacity="0.7" />
     </>
   ),
   nicu: () => (
     <>
-      <Cot x={70} y={95} scale={1.2} />
-      <Waveform x={80} y={115} w={44} scale={0.55} color="var(--color-primary)" />
-      <SignatureBars x={18} y={40} scale={0.55} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="240" cy="294" rx="180" ry="12" fill="url(#lgShd)" stroke="none" />
+      <path data-part="signal" d="M96 124Q240 60 384 124" stroke="#C2185B" strokeWidth="2.4" strokeDasharray="1 7" />
+      <g data-part="object">
+        <rect x="100" y="214" width="280" height="62" rx="10" fill="#fff" />
+        <path d="M130 276v8M350 276v8" />
+        <circle cx="130" cy="292" r="8" fill="#252525" />
+        <circle cx="130" cy="292" r="3.04" fill="#fff" stroke="none" />
+        <circle cx="350" cy="292" r="8" fill="#252525" />
+        <circle cx="350" cy="292" r="3.04" fill="#fff" stroke="none" />
+        <rect x="304" y="228" width="60" height="32" rx="6" fill="#252525" />
+        <circle cx="122" cy="245" r="5" fill="#C2185B" stroke="none" />
+      </g>
+      <path data-part="signal" d="M310 246h10l5-9 6 16 5-10h20" stroke="#C2185B" strokeWidth="2.4" />
+      <g data-part="shell">
+        <path d="M116 214V176Q116 128 170 128H310Q364 128 364 176V214Z" fill="#FCE4EC" fillOpacity="0.55" />
+        <ellipse cx="240" cy="196" rx="100" ry="26" fill="#C2185B" fillOpacity="0.1" stroke="none" />
+        <rect x="128" y="196" width="224" height="18" rx="9" fill="#fff" />
+        <rect x="160" y="172" width="112" height="28" rx="14" fill="#fff" stroke="#C2185B" />
+        <path d="M204 172v28" stroke="#C2185B" />
+        <circle cx="332" cy="168" r="8" fill="#fff" />
+        <path d="M136 172q6-26 34-30" stroke="#fff" strokeWidth="3.4" opacity="0.95" />
+      </g>
     </>
   ),
   oxygen: () => (
     <>
-      <Cylinder x={80} y={60} />
-      <OxygenFlow x={125} y={80} scale={1.1} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="270" cy="294" rx="205" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="object">
+        <rect x="110" y="112" width="76" height="176" rx="30" fill="#fff" />
+        <path d="M110 188H186M110 214H186" stroke="#C2185B" strokeWidth="3" />
+        <rect x="134" y="86" width="28" height="30" rx="4" fill="#fff" />
+        <rect x="124" y="60" width="48" height="28" rx="7" fill="#C2185B" stroke="#252525" />
+        <circle cx="200" cy="96" r="18" fill="#fff" />
+        <path d="M200 96l8-8" stroke="#C2185B" strokeWidth="3" />
+        <path d="M124 150q4-16 14-20" stroke="#e9dfe4" strokeWidth="3.4" />
+      </g>
+      <path data-part="route" d="M172 70C244 30 284 92 300 200" stroke="#C2185B" strokeWidth="5" strokeDasharray="0.1 6" />
+      <g data-part="secondary">
+        <path d="M282 292V254M436 292V254M270 292H448" />
+        <rect x="258" y="232" width="192" height="22" rx="11" fill="#fff" />
+        <rect x="270" y="222" width="70" height="12" rx="6" fill="#FCE4EC" />
+        <circle cx="304" cy="212" r="12" fill="#FCE4EC" stroke="#C2185B" />
+        <circle cx="282" cy="296" r="7" fill="#252525" />
+        <circle cx="282" cy="296" r="2.66" fill="#fff" stroke="none" />
+        <circle cx="436" cy="296" r="7" fill="#252525" />
+        <circle cx="436" cy="296" r="2.66" fill="#fff" stroke="none" />
+      </g>
+      <path data-part="signal" d="M322 202q8-6 16 0M326 216q8-6 16 0" stroke="#C2185B" strokeWidth="2.2" opacity="0.7" />
     </>
   ),
   "patient-transfer": () => (
     <>
-      <Stretcher x={40} y={90} />
-      <RouteLine x={45} y={130} w={110} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="250" cy="296" rx="215" ry="12" fill="url(#lgShd)" stroke="none" />
+      <rect data-part="secondary" x="28" y="176" width="86" height="114" rx="8" strokeDasharray="3 6" opacity="0.4" />
+      <g data-part="object">
+        <rect x="324" y="112" width="116" height="178" rx="9" fill="#fff" />
+        <path d="M382 128v22M371 139h22" stroke="#C2185B" strokeWidth="5" />
+        <g fill="#FCE4EC" strokeWidth="1.8">
+          <rect x="340" y="166" width="20" height="18" rx="3" />
+          <rect x="372" y="166" width="20" height="18" rx="3" />
+          <rect x="404" y="166" width="20" height="18" rx="3" />
+          <rect x="340" y="198" width="20" height="18" rx="3" />
+          <rect x="372" y="198" width="20" height="18" rx="3" />
+          <rect x="404" y="198" width="20" height="18" rx="3" />
+        </g>
+        <rect x="366" y="242" width="32" height="48" rx="5" fill="#FCE4EC" stroke="#C2185B" />
+      </g>
+      <path data-part="route" d="M170 262C226 262 236 296 290 296H348" stroke="#C2185B" strokeWidth="3" strokeDasharray="1 8" />
+      <g data-part="secondary">
+        <path d="M62 244L80 274M80 244L62 274M122 244L140 274M140 244L122 274M56 276H156" />
+        <rect x="48" y="228" width="116" height="16" rx="8" fill="#fff" />
+        <circle cx="62" cy="284" r="6" fill="#252525" />
+        <circle cx="62" cy="284" r="2.28" fill="#fff" stroke="none" />
+        <circle cx="142" cy="284" r="6" fill="#252525" />
+        <circle cx="142" cy="284" r="2.28" fill="#fff" stroke="none" />
+      </g>
+      <circle data-part="signal" cx="240" cy="286" r="8" fill="#C2185B" stroke="#fff" strokeWidth="3" />
+      <circle cx="28" cy="298" r="7" fill="#fff" stroke="#C2185B" />
     </>
   ),
   outstation: () => (
     <>
-      <AmbulanceGlyph x={25} y={70} />
-      <RouteLine x={30} y={130} w={130} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <g data-part="secondary" fill="#C2185B" stroke="none">
+        <rect x="228" y="150" width="34" height="90" rx="17" opacity="0.07" transform="rotate(20 245 195)" />
+        <rect x="290" y="112" width="34" height="140" rx="17" opacity="0.1" transform="rotate(20 307 182)" />
+        <rect x="352" y="70" width="34" height="190" rx="17" opacity="0.13" transform="rotate(20 369 165)" />
+      </g>
+      <path
+        data-part="route"
+        d="M30 300C150 300 170 244 250 232S356 190 410 118"
+        stroke="#252525"
+        strokeOpacity="0.08"
+        strokeWidth="30"
+      />
+      <path data-part="route" d="M30 300C150 300 170 244 250 232S356 190 410 118" stroke="#C2185B" strokeWidth="3" strokeDasharray="1 9" />
+      <g data-part="object">
+        <use href="#amb" x="40" y="222" width="150" height="70" />
+      </g>
+      <g data-part="signal">
+        <path
+          d="M410 138C392 114 384 100 384 86A26 26 0 0 1 436 86C436 100 428 114 410 138Z"
+          fill="#C2185B"
+          stroke="none"
+        />
+        <circle cx="410" cy="86" r="9" fill="#fff" stroke="none" />
+        <ellipse cx="410" cy="142" rx="32" ry="8" stroke="#C2185B" strokeWidth="1.6" opacity="0.5" />
+      </g>
+      <circle cx="24" cy="302" r="6" fill="#fff" stroke="#C2185B" />
+      <text x="20" y="326" fontFamily="Geist Mono, monospace" fontSize="10.5" letterSpacing="1.5" fill="#252525" stroke="none">
+        HYDERABAD
+      </text>
     </>
   ),
   "dead-body": () => (
     <>
-      <rect x="35" y="70" width="110" height="30" rx="10" fill="var(--color-cloud)" stroke="var(--color-ink)" strokeOpacity="0.14" />
-      <rect x="35" y="70" width="34" height="30" rx="10" fill="var(--color-tint)" />
-      <SignatureBars x={95} y={45} scale={0.55} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="240" cy="296" rx="190" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="object">
+        <path d="M110 232L150 280M150 232L110 280M330 232L370 280M370 232L330 280M98 282H382" />
+        <rect x="70" y="222" width="340" height="14" rx="7" fill="#fff" />
+        <path d="M84 222C84 190 122 178 162 186C224 198 300 190 380 196C402 198 408 212 402 222Z" fill="#fff" />
+        <path
+          d="M152 188C160 202 166 212 168 222M252 194C254 206 256 214 256 222M332 197C334 208 336 215 336 222"
+          strokeWidth="1.8"
+          opacity="0.55"
+        />
+        <path d="M96 212H396" stroke="#C2185B" strokeWidth="2.6" />
+        <circle cx="98" cy="290" r="7" fill="#252525" />
+        <circle cx="98" cy="290" r="2.66" fill="#fff" stroke="none" />
+        <circle cx="382" cy="290" r="7" fill="#252525" />
+        <circle cx="382" cy="290" r="2.66" fill="#fff" stroke="none" />
+      </g>
+      <path data-part="route" d="M60 316H366" stroke="#C2185B" strokeWidth="2.4" strokeDasharray="1 8" opacity="0.8" />
+      <g data-part="signal">
+        <circle cx="404" cy="316" r="15" stroke="#C2185B" strokeWidth="1.6" opacity="0.4" />
+        <circle cx="404" cy="316" r="7" fill="#fff" stroke="#C2185B" />
+      </g>
     </>
   ),
   "freezer-box": () => (
     <>
-      <rect x="55" y="65" width="80" height="60" rx="8" fill="var(--color-cloud)" stroke="var(--color-primary)" strokeWidth="1.2" opacity="0.9" />
-      <rect x="55" y="65" width="80" height="16" rx="8" fill="var(--color-tint)" />
-      <Snowflake x={95} y={104} scale={1.1} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="230" cy="296" rx="195" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="object">
+        <path d="M90 150L150 108H360L300 150Z" fill="#FCE4EC" />
+        <path d="M300 150L360 108V232L300 272Z" fill="#f3e9ee" />
+        <rect x="90" y="150" width="210" height="122" fill="#fff" />
+        <path d="M90 178H300M300 178L360 136" strokeWidth="2" />
+        <rect x="170" y="188" width="50" height="10" rx="5" fill="#252525" />
+        <rect x="108" y="212" width="66" height="34" rx="6" fill="#252525" />
+        <circle cx="188" cy="229" r="4.5" fill="#C2185B" stroke="none" />
+        <path d="M96 272v10M290 272v10" strokeWidth="5" />
+      </g>
+      <path data-part="signal" d="M116 232h12l5-9 6 15 5-9h20" stroke="#C2185B" strokeWidth="2.4" />
+      <g data-part="secondary" stroke="#C2185B" strokeWidth="2.4">
+        <path d="M250 208v34M235 216l30 18M265 216l-30 18" />
+      </g>
     </>
   ),
   mortuary: () => (
     <>
-      <AmbulanceGlyph x={30} y={90} />
-      <Snowflake x={130} y={55} scale={0.75} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="240" cy="296" rx="200" ry="12" fill="url(#lgShd)" stroke="none" />
+      <path data-part="route" d="M30 318H420" stroke="#C2185B" strokeWidth="2.4" strokeDasharray="1 8" opacity="0.8" />
+      <g data-part="object">
+        <use href="#van" x="50" y="150" width="380" height="152" />
+      </g>
+      <g data-part="signal">
+        <circle cx="452" cy="318" r="14" stroke="#C2185B" strokeWidth="1.6" opacity="0.4" />
+        <circle cx="452" cy="318" r="6" fill="#fff" stroke="#C2185B" />
+      </g>
     </>
   ),
   event: () => (
     <>
-      <AmbulanceGlyph x={20} y={95} />
-      <g transform="translate(135 45)">
-        <path d="M0 0 C8 0 14 6 14 14 C14 24 0 38 0 38 C0 38 -14 24 -14 14 C-14 6 -8 0 0 0 Z" fill="var(--color-tint)" stroke="var(--color-primary)" strokeWidth="1.5" />
-        <circle cx="0" cy="14" r="4.5" fill="var(--color-primary)" />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="240" cy="296" rx="215" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="secondary">
+        <path d="M244 140Q348 58 452 140Z" fill="#FCE4EC" />
+        <rect x="254" y="140" width="188" height="150" rx="6" fill="#fff" />
+        <path d="M300 140V290M348 140V290M396 140V290" strokeWidth="1.8" opacity="0.5" />
+        <path d="M322 290V236Q348 216 374 236V290" fill="#FCE4EC" />
+        <path d="M348 92V50" />
+        <path d="M348 50l32 11-32 11Z" fill="#C2185B" stroke="none" />
+      </g>
+      <g data-part="object">
+        <use href="#amb" x="26" y="204" width="190" height="89" />
+      </g>
+      <ellipse data-part="signal" cx="121" cy="296" rx="112" ry="15" stroke="#C2185B" strokeWidth="2" strokeDasharray="3 7" />
+      <g data-part="signal">
+        <circle cx="121" cy="172" r="17" fill="#C2185B" stroke="none" />
+        <path d="M115 165v14M127 165v14" stroke="#fff" strokeWidth="3.6" />
       </g>
     </>
   ),
   corporate: () => (
     <>
-      <Building x={20} y={30} scale={0.85} />
-      <AmbulanceGlyph x={95} y={112} scale={0.75} />
-      <SignatureBars x={150} y={40} scale={0.5} />
+      <circle data-part="glow" cx="240" cy="172" r="150" fill="url(#lgGlow)" stroke="none" />
+      <ellipse data-part="shadow" cx="250" cy="296" rx="215" ry="12" fill="url(#lgShd)" stroke="none" />
+      <g data-part="secondary">
+        <path d="M200 74L242 54V262L200 290Z" fill="#f3e9ee" />
+        <rect x="66" y="74" width="134" height="216" rx="6" fill="#fff" />
+        <g fill="#FCE4EC" strokeWidth="1.8">
+          <rect x="86" y="96" width="24" height="18" rx="3" />
+          <rect x="122" y="96" width="24" height="18" rx="3" />
+          <rect x="158" y="96" width="24" height="18" rx="3" />
+          <rect x="86" y="130" width="24" height="18" rx="3" />
+          <rect x="122" y="130" width="24" height="18" rx="3" />
+          <rect x="158" y="130" width="24" height="18" rx="3" />
+          <rect x="86" y="164" width="24" height="18" rx="3" />
+          <rect x="122" y="164" width="24" height="18" rx="3" />
+          <rect x="158" y="164" width="24" height="18" rx="3" />
+          <rect x="86" y="198" width="24" height="18" rx="3" />
+          <rect x="122" y="198" width="24" height="18" rx="3" />
+          <rect x="158" y="198" width="24" height="18" rx="3" />
+        </g>
+        <rect x="118" y="242" width="34" height="48" rx="5" fill="#fff" stroke="#C2185B" />
+      </g>
+      <g data-part="object">
+        <use href="#amb" x="270" y="206" width="190" height="89" />
+      </g>
+      <path data-part="route" d="M152 300C190 322 240 322 282 300" stroke="#C2185B" strokeWidth="3" strokeDasharray="1 8" />
+      <circle data-part="signal" cx="135" cy="300" r="6" fill="#C2185B" stroke="#fff" strokeWidth="2.4" />
     </>
   ),
 };
 
 /**
- * Custom brand-geometric hero illustration per service — the shared visual
- * system referenced throughout the service pages. All compositions are
- * assembled from the same small set of primitives above, never duplicated
- * per-service, and share the "escalating bars" signature motif.
+ * Custom brand-geometric hero illustration per service. All 13 supplied
+ * scenes are literal artwork from the design; only "private" (not part of
+ * that batch) reuses the ambulance base with a booking-check accent.
  */
 export function ServiceIllustration({
   type,
@@ -347,22 +422,21 @@ export function ServiceIllustration({
   const scene = SCENES[type]();
 
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="relative flex h-[200px] w-full items-center justify-center md:h-[260px]">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(50% 60% at 60% 50%, var(--color-tint) 0%, rgba(252,228,236,0) 70%)",
-          }}
-        />
-        <svg role="img" aria-label={label} viewBox="0 0 200 180" className="h-full w-full max-w-[280px]">
-          {/* faint technical grid mark, restrained */}
-          <line x1="0" y1="150" x2="200" y2="150" stroke="var(--color-ink)" strokeOpacity="0.06" strokeWidth="1" />
-          {scene}
-        </svg>
-      </div>
-    </MotionConfig>
+    <div className="relative flex h-[220px] w-full items-center justify-center md:h-[300px]">
+      <svg
+        role="img"
+        aria-label={label}
+        viewBox="0 0 480 340"
+        className="h-full w-full max-w-[480px]"
+        fill="none"
+        stroke="#252525"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <Defs />
+        {scene}
+      </svg>
+    </div>
   );
 }

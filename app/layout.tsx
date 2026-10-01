@@ -4,7 +4,7 @@ import { MotionConfig } from "motion/react";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { MobileCallBar } from "@/components/MobileCallBar";
+import { FloatingDock } from "@/components/FloatingDock";
 import { CustomCursor } from "@/components/CustomCursor";
 import { JsonLd } from "@/components/JsonLd";
 import { ConsentProvider } from "@/components/ConsentProvider";
@@ -63,7 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </main>
             <Footer />
           </MotionConfig>
-          <MobileCallBar />
+          <FloatingDock />
           <CustomCursor />
           <CookieConsent />
           <Analytics />

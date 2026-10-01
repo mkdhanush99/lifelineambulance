@@ -24,11 +24,13 @@ export function buildMetadata({ title, description, path, noindex }: PageMetadat
       siteName: BUSINESS_NAME,
       locale: "en_IN",
       type: "website",
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: BUSINESS_NAME }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
+      images: ["/og-image.jpg"],
     },
   };
 }

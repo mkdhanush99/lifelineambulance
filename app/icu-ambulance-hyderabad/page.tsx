@@ -23,10 +23,6 @@ const content: ServicePageContent = {
   heroTitle: "ICU Ambulance Service in Hyderabad",
   heroIntro:
     "Some patients need close monitoring throughout a journey, not just transport. An ICU ambulance is discussed and arranged for exactly that kind of transfer.",
-  heroImage: {
-    src: "/photos/mobile-icu-ambulance-hyderabad.jpg",
-    alt: "Mobile ICU ambulance used for critical patient transport in Hyderabad",
-  },
   whatItIs: [
     "An ICU ambulance is typically used when a patient's condition needs closer monitoring during transport than a standard ambulance provides — for example, patients moving between intensive care units, or those who are critical but not on a ventilator.",
     "The specific monitoring equipment and staffing available for a transfer depends on the vehicle assigned and the patient's needs at the time. Our coordinator will discuss what's required and what can be arranged when you call.",

@@ -40,10 +40,12 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <a href={PHONE_HREF} className={`${PRIMARY_BUTTON} hidden px-5 py-2.5 text-sm md:inline-flex`}>
-            Call {PHONE_DISPLAY}
-          </a>
+        <div className="flex items-center gap-2">
+          <span className="hidden md:inline-flex">
+            <a href={PHONE_HREF} className={`${PRIMARY_BUTTON} px-5 py-2.5 text-sm`}>
+              Call {PHONE_DISPLAY}
+            </a>
+          </span>
           <MobileNav />
         </div>
       </div>

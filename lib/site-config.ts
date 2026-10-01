@@ -38,6 +38,10 @@ export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/lifelineambulances/",
 };
 
+const primaryAddress = ADDRESSES[0];
+const FULL_ADDRESS = `${primaryAddress.lines.join(", ")}, ${primaryAddress.city}, ${primaryAddress.state} ${primaryAddress.postalCode}`;
+export const MAPS_HREF = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(FULL_ADDRESS)}`;
+
 export const AVAILABILITY_CAVEAT =
   "Service availability and vehicle type can vary by location, traffic and current availability. Call " +
   PHONE_DISPLAY +
