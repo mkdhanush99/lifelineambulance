@@ -16,15 +16,7 @@ export function Header() {
             width={230}
             height={58}
             priority
-            className="hidden h-10 w-auto md:block"
-          />
-          <Image
-            src="/brand/symbol-pink.svg"
-            alt="Life Line Ambulance Service"
-            width={36}
-            height={36}
-            priority
-            className="h-9 w-9 md:hidden"
+            className="h-8 w-auto md:h-10"
           />
         </Link>
 
