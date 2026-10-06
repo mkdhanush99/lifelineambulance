@@ -17,7 +17,7 @@ Date: 2026-10-06. Tested against a local **production build** (`next build --web
 
 ## Fixes made during handover (production issues only, no design change)
 
-1. `Permissions-Policy` had `geolocation=()`, which blocks the Location button in browsers. Now `geolocation=(self)`. **Live site still has the old header until redeployed.**
+1. `Permissions-Policy` had `geolocation=()`, which blocks the Location button in browsers. Now `geolocation=(self)`. Deployed 2026-10-06 and verified live (`permissions-policy: ... geolocation=(self)`).
 2. Fallback domain in code pointed at a non-existent domain; now `https://lifelineambulances.in` (also `.env.example`).
 3. Footer links enlarged to a >=24px tap target (padding only).
 4. JSON-LD output now escapes `<` (`<`) as defence in depth.
@@ -41,7 +41,7 @@ Date: 2026-10-06. Tested against a local **production build** (`next build --web
 - [x] Contact: the page offers call / address / social links
 - [x] Forms: **none exist** (call/WhatsApp only). Nothing to test
 - [x] All links work (crawler; external social links not requested)
-- [ ] Real-device test of Call / WhatsApp / Location on iOS and Android after the Permissions-Policy fix is deployed
+- [ ] Real-device test of Call / WhatsApp / Location on iOS and Android (the Permissions-Policy fix is now live)
 
 ### SEO
 - [x] Titles, meta descriptions, H1, canonicals, schema syntax, sitemap, robots, internal links, alt text (see `handover/SEO.md`)
@@ -78,7 +78,7 @@ Date: 2026-10-06. Tested against a local **production build** (`next build --web
 - [x] Production domain https://lifelineambulances.in serves HTTPS 200 (checked 2026-10-01)
 - [x] DNS resolves (managed in Hostinger)
 - [ ] Environment variables: `NEXT_PUBLIC_SITE_URL` evidently set (live sitemap uses the right domain); GA/Ads/Search Console values unknown, confirm in hPanel
-- [ ] Redeploy needed to ship the fixes above, then re-verify
+- [x] Fixes above deployed 2026-10-06; live site returns 200, sitemap 200 with 29 URLs, canonical `https://lifelineambulances.in/`
 - [ ] Remove or redirect the temporary hostingersite.com copy
 
 ### CLIENT HANDOVER
