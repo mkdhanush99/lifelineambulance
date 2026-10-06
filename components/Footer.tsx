@@ -37,23 +37,23 @@ export function Footer() {
           </p>
         </div>
 
-        <nav aria-label="Services" className="grid grid-cols-1 gap-1.5 text-sm">
+        <nav aria-label="Services" className="grid grid-cols-1 gap-0.5 text-sm">
           <p className="mb-1 font-semibold text-[var(--color-ink)]">Services</p>
           {SERVICES.map((service) => (
             <Link
               key={service.slug}
               href={service.href ?? "/#services"}
-              className="text-[var(--color-ink-muted)] hover:text-[var(--color-primary)]"
+              className="py-1 text-[var(--color-ink-muted)] hover:text-[var(--color-primary)]"
             >
               {service.name}
             </Link>
           ))}
         </nav>
 
-        <nav aria-label="Company" className="grid grid-cols-1 gap-1.5 text-sm">
+        <nav aria-label="Company" className="grid grid-cols-1 gap-0.5 text-sm">
           <p className="mb-1 font-semibold text-[var(--color-ink)]">Company</p>
           {COMPANY_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="text-[var(--color-ink-muted)] hover:text-[var(--color-primary)]">
+            <Link key={link.href} href={link.href} className="py-1 text-[var(--color-ink-muted)] hover:text-[var(--color-primary)]">
               {link.label}
             </Link>
           ))}
@@ -64,10 +64,10 @@ export function Footer() {
         <p>{EMERGENCY_DISCLAIMER}</p>
         <nav
           aria-label="Legal"
-          className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-black/10 pt-4"
+          className="mt-4 flex flex-wrap gap-x-4 gap-y-0 border-t border-black/10 pt-4"
         >
           {LEGAL_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-[var(--color-primary)]">
+            <Link key={link.href} href={link.href} className="inline-block py-1 hover:text-[var(--color-primary)]">
               {link.label}
             </Link>
           ))}

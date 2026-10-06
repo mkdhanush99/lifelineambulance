@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 300">
+<svg x="0" y="10" width="280" height="280" viewBox="0 0 512 512">
+<rect x="120" y="300" width="40" height="90" rx="20" fill="#000000" transform="rotate(20 140 345)"/>
+<rect x="190" y="250" width="40" height="140" rx="20" fill="#000000" transform="rotate(20 210 320)"/>
+<rect x="260" y="180" width="40" height="210" rx="20" fill="#000000" transform="rotate(20 280 285)"/>
+<circle cx="335" cy="135" r="24" fill="#000000"/>
+</svg>
+<g transform="translate(330,60)">
+<text x="0" y="90" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="80" letter-spacing="0.5">
+  <tspan fill="#000000">LIFE </tspan><tspan fill="#000000">LINE</tspan>
+</text>
+<text x="2" y="140" font-family="Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="30" letter-spacing="5" fill="#000000">AMBULANCE SERVICE</text>
+</g>
+</svg>

@@ -1,6 +1,6 @@
-// [CLIENT CONFIRMATION REQUIRED: production domain] — placeholder until the client confirms one.
+// Production domain. Override with NEXT_PUBLIC_SITE_URL (set at build time).
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.lifelineambulanceservice.in";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://lifelineambulances.in";
 
 export const PHONE_DISPLAY = "9951244266";
 export const PHONE_HREF = "tel:+919951244266";
